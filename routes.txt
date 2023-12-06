@@ -1,0 +1,52 @@
+
+Crafted beers
+- index.html - login form (egy gomb)
+- kezmuvesek.html - gallery, új fiók, régi módosítása
+- ujprofil.html - profilok létrehozása, save és cancel
+- adatmodositas.html - profilok adatainak módosítása, új sörök hozzáadása, save és cancel
+
+Routing
+
+renderMW
+
+middlewares/auth/
+    handleWrongEmailMW.js
+    checkMailMW.js
+    authMW.js
+
+middlewares/kezmuves/
+    getKezmuvesekMW
+    saveProfilMW
+    delKezmuvesMW
+
+GET /?hiba=nemjoemail
+    handleWrongEmailMW
+    renderMW(index.html)
+
+POST /login                 - email ellenoriz
+    checkMailMW
+
+GET /raidebere
+    authMW
+    getSorMW
+    renderMW(kezmuvesek.html)
+
+GET,POST /raidebere/new
+    authMW
+    saveProfilMW
+    renderMW(ujprofil.html)
+        -ha volt ertek bekudlve -> form elemek azzal toltodjenek fel
+        -ha nem, nem
+
+GET,POST /raidebere/edit/:kezmuvesek      - adatmodositas.html
+    authMW
+    getKezmuvesMW
+    saveProfilMW
+    renderMW(adatmodositas.html)
+            -ha volt ertek bekudlve -> form elemek azzal toltodjenek fel
+            -ha nem, nem
+
+GET /raidebere/del/:kezmuvesek
+    authMW
+    getKezmuvesMW
+    delKezmuvesMW
